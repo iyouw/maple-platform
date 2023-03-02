@@ -1,12 +1,11 @@
-import type { Page } from "./page";
+import type { Template } from "./template";
 
 export class App {
-  public icon?: string;
   public name?: string;
+
+  public icon?: string;
+  
   public description?: string;
-  public version?: string;
-
-  public versions?: Array<string>;
-
-  public pages?: Array<Page>;
+  
+  public templates?: Array<Template>;
 }

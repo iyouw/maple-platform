@@ -1,4 +1,4 @@
-import { Type } from "./type";
+import { Type } from "../base/type";
 
 export class BooleanType extends Type {
   public static readonly Type: string = `boolean`;

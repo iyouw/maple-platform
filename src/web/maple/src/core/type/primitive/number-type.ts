@@ -1,10 +1,10 @@
-import { Type } from "./type";
+import { Type } from "../base/type";
 
 export class NumberType extends Type {
   public static readonly Type: string = `number`;
 
-  public constructor() {
-    super(NumberType.Type);
+  public constructor(name: string = NumberType.Type) {
+    super(name);
   }
 
   public override isNumber(): this is NumberType {

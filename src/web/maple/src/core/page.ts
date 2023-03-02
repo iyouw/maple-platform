@@ -1,13 +1,5 @@
-import type { Component } from "./component";
+import { Template } from "./template";
 
-export class Page {
-  public name?: string;
-  public description?: string;
-
+export class Page extends Template {
   public url?: string;
-
-  public width?: number;
-  public height?: number;
-
-  public components?: Array<Component>; 
 }
