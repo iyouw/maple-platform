@@ -6,14 +6,26 @@ import LinkerIcon from '@linker-design/linker/es/icon';
 import App from './App.vue'
 import router from './router'
 
+import { useComponents } from '@/components'
+import { useDirectives } from '@/directives'
+
+import { config } from '@/utils/configuration';
+
 import './assets/main.css';
 import '@linker-design/linker/dist/linker.less';
 
-const app = createApp(App)
+config.loadAsync().then(() => {
+  const app = createApp(App);
 
-app.use(createPinia())
-app.use(router)
-app.use(Linker);
-app.use(LinkerIcon);
+  app.use(createPinia());
+  app.use(router)
+  app.use(Linker);
+  app.use(LinkerIcon);
+  
+  useComponents(app);
+  useDirectives(app);
 
-app.mount('#app')
+  app.mount('#app')
+})
+
+

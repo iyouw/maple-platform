@@ -2,10 +2,12 @@ import type { Component } from "@/core/component";
 import { Page } from "@/core/page";
 import { defineComponent, resolveComponent } from "vue";
 
-import Container from '../container';
+import { createSpaceM } from "@/utils/space";
+
+const [bem, name] = createSpaceM(`designer`);
 
 export default defineComponent({
-  name: `designer`,
+  name,
   props: {
     page: Page
   },
@@ -17,16 +19,16 @@ export default defineComponent({
       const comp = resolveComponent(tag);
       const { props = {}, style = {} } = component;
       return (
-        <Container>
+        <m-container>
           <comp {...props } style={ style }>
             { renderComponents(component.children) }
           </comp> 
-        </Container>
+        </m-container>
       ) 
     }
 
     return () => (
-      <div>
+      <div class={ bem() }>
         {renderComponents(props.page?.components ?? [])}
       </div>
     );

@@ -1,7 +1,9 @@
 lockfileVersion: 5.4
 
 specifiers:
+  '@linker-design/configuration': ^0.1.1
   '@linker-design/linker': ^1.0.13
+  '@linker-design/utils': ^0.1.7
   '@rushstack/eslint-patch': ^1.2.0
   '@types/node': ^18.14.2
   '@vitejs/plugin-vue': ^4.0.0
@@ -23,7 +25,9 @@ specifiers:
   vue-tsc: ^1.2.0
 
 dependencies:
+  '@linker-design/configuration': 0.1.1
   '@linker-design/linker': 1.0.13_vue@3.2.47
+  '@linker-design/utils': 0.1.7
   axios: 1.3.4
   pinia: 2.0.32_7h6e7cvei2rsgyre2mq4fyhehq
   vue: 3.2.47
@@ -631,6 +635,16 @@ packages:
       color: 4.2.3
     dev: false
 
+  /@linker-design/configuration/0.1.1:
+    resolution: {integrity: sha512-QJ5+D9pNrcC92GuDo4Jg6d4mQf1cB3iM4gO7wzGuwu02zB/sD3dY/bKXjo1LnUlB/gAWhcv1f6z38DtEdvVBxA==}
+    dependencies:
+      '@linker-design/utils': 0.1.3
+      axios: 1.3.4
+      crypto-js: 4.1.1
+    transitivePeerDependencies:
+      - debug
+    dev: false
+
   /@linker-design/linker/1.0.13_vue@3.2.47:
     resolution: {integrity: sha512-nYmtCUxkzw2u8Bd7yNnIg9ndhQweZinl9ncrXDno5TB7gFMwuANr3QdnALUCuotP88JueHQrP9pqhgnpTXmtMA==}
     peerDependencies:
@@ -647,6 +661,14 @@ packages:
       resize-observer-polyfill: 1.5.1
       scroll-into-view-if-needed: 2.2.31
       vue: 3.2.47
+    dev: false
+
+  /@linker-design/utils/0.1.3:
+    resolution: {integrity: sha512-vPO09bFG9tvv6STg5hr1PAeFhwnpUqHxodIW1lY0tzwjYaGt6aYKi/ILUAIBZxjkjBQkx5/N8lu1LkgZh2HCDQ==}
+    dev: false
+
+  /@linker-design/utils/0.1.7:
+    resolution: {integrity: sha512-UAIQcwAPdKZQNt0km+7KI0FjobHFH2XRPsYbPuOiMPExE16KvBE07DLCBalLTc5y4eretQTrde12hGsbgqYrQw==}
     dev: false
 
   /@nodelib/fs.scandir/2.1.5:
@@ -1257,6 +1279,10 @@ packages:
       shebang-command: 2.0.0
       which: 2.0.2
     dev: true
+
+  /crypto-js/4.1.1:
+    resolution: {integrity: sha512-o2JlM7ydqd3Qk9CA0L4NL6mTzU2sdx96a+oOfPu8Mkl/PK51vSyoi8/rQ8NknZtk44vq15lmhAj9CIAGwgeWKw==}
+    dev: false
 
   /cssesc/3.0.0:
     resolution: {integrity: sha512-/Tb/JcjK111nNScGob5MNtsntNM1aCNUDipB/TkwZFhyDrrE47SOx/18wF2bbjgc3ZzCSKW1T5nt5EbFoAz/Vg==}

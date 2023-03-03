@@ -1,8 +1,8 @@
 <template>
-  <designer :page="p"/>
+  <m-designer :page="p"/>
 </template>
 <script setup lang="ts">
-import Designer from '@/components/designer';
+
 import { Page } from '@/core/page';
 import { ComponentMeta } from '@/core/component-meta';
 import { Component } from '@/core/component';
