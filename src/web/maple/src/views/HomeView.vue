@@ -1,5 +1,7 @@
 <template>
-  <m-designer :page="p"/>
+  <m-workspace>
+    <m-designer :page="p"/>
+  </m-workspace>
 </template>
 <script setup lang="ts">
 

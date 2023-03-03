@@ -1,19 +1,31 @@
+@left-width: 300px;
+@right-width: 300px;
+
 .m{
   &-workspace{
+    height: 100%;
+
     display: flex;
     flex-direction: row;
     flex-shrink: 0;
 
     &__left{
-
+      width: @left-width;
+      height: 100%;
+      overflow: hidden;
+      border-right: 1px solid var(--split-color);
     }
 
     &__middle{
-
+      flex: 1;
+      height: 100%;
     }
 
     &__right{
-      
+      width: @right-width;
+      height: 100%;
+      overflow: hidden;
+      border-left: 1px solid var(--split-color);
     }
   }
 }

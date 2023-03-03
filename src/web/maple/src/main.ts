@@ -11,8 +11,8 @@ import { useDirectives } from '@/directives'
 
 import { config } from '@/utils/configuration';
 
-import './assets/main.css';
 import '@linker-design/linker/dist/linker.less';
+import './style/index.less';
 
 config.loadAsync().then(() => {
   const app = createApp(App);
