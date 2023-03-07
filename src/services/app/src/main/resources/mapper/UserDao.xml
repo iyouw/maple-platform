@@ -1,0 +1,32 @@
+<!-- <?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.maple.app.dao.UserDao">
+    <resultMap type="com.maple.app.entity.User" id="UserResult">
+        <result property="id" column="id"/>
+        <result property="name" column="name"/>
+        <result property="password" column="password"/>
+    </resultMap>
+
+    <select id="findAllUsers" resultMap="UserResult">
+        select id,name,password from user
+        order by id desc
+    </select>
+
+
+    <insert id="insertUser" parameterType="com.maple.app.entity.User">
+        insert into user(name,password)
+        values(#{name},#{password})
+    </insert>
+
+    <update id="updateUser" parameterType="com.maple.app.entity.User">
+        update user
+        set
+        name=#{name},password=#{password}
+        where id=#{id}
+    </update>
+
+    <delete id="deleteUser" parameterType="int">
+        delete from user where id=#{id}
+    </delete>
+
+</mapper> -->
