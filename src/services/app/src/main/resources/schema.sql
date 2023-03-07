@@ -33,6 +33,7 @@ CREATE Table page(
   height INT,
   model TEXT,
   url VARCHAR(255),
+  app_id VARCHAR(36),
   created_user_id VARCHAR(36),
   latest_updated_user_id VARCHAR(36),
   created_time DATETIME,

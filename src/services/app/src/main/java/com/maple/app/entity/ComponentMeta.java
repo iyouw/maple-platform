@@ -1,17 +1,21 @@
 package com.maple.app.entity;
 
-import java.util.UUID;
+import java.util.ArrayList;
 
 import com.maple.app.infra.EntityBase;
 
-public class ComponentMeta extends EntityBase<UUID> {
+public class ComponentMeta extends EntityBase<String> {
   private String name;
   private String icon;
   private String description;
   private String tag;
   private String slots;
 
-  public ComponentMeta() {}
+  private ArrayList<PropMeta> props;
+
+  public ComponentMeta() {
+    this.props = new ArrayList<PropMeta>();
+  }
 
   public String getName() {
     return this.name;
@@ -51,5 +55,17 @@ public class ComponentMeta extends EntityBase<UUID> {
 
   public void setSlots(String slots) {
     this.slots = slots;
+  }
+
+  public ArrayList<PropMeta> getProps() {
+    return this.props;
+  }
+
+  public void setProps(ArrayList<PropMeta> props) {
+    this.props = props;
+  }
+
+  public void addProp(PropMeta prop) {
+    this.props.add(prop);
   }
 }

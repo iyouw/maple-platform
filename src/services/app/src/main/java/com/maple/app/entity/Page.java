@@ -1,12 +1,8 @@
 package com.maple.app.entity;
 
-import java.util.UUID;
-
-import javax.management.loading.PrivateClassLoader;
-
 import com.maple.app.infra.EntityBase;
 
-public class Page extends EntityBase<UUID> {
+public class Page extends EntityBase<String> {
   private String name;
   private String icon;
   private String description;
