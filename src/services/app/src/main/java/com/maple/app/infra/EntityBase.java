@@ -1,12 +1,14 @@
 package com.maple.app.infra;
 
-import java.sql.Timestamp;
+import java.time.LocalDateTime;
+
 public class EntityBase<TKey> {
   private TKey id;
   private String createdUserId;
   private String latestUpdatedUserId;
-  private Timestamp createdTime;
-  private Timestamp latestUpdatedTime;
+  private LocalDateTime createdTime;
+  private LocalDateTime latestUpdatedTime;
+  private Boolean deleted;
   
   public TKey getId() {
     return this.id;
@@ -28,19 +30,27 @@ public class EntityBase<TKey> {
     return this.latestUpdatedUserId;
   }
 
-  public Timestamp getCreatedTime() {
+  public LocalDateTime getCreatedTime() {
     return this.createdTime;
   }
 
-  public void setCreatedTime(Timestamp createdTime) {
+  public void setCreatedTime(LocalDateTime createdTime) {
     this.createdTime = createdTime;
   }
 
-  public Timestamp getLatestUpdatedTime() {
+  public LocalDateTime getLatestUpdatedTime() {
     return this.latestUpdatedTime;
   }
 
-  public void setLatestUpdatedTime(Timestamp latestUpdatedTime) {
+  public void setLatestUpdatedTime(LocalDateTime latestUpdatedTime) {
     this.latestUpdatedTime = latestUpdatedTime;
+  }
+
+  public Boolean getDeleted() {
+    return this.deleted;
+  }
+
+  public void setDeleted(Boolean deleted){
+    this.deleted = deleted;
   }
 }

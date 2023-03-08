@@ -1,4 +1,10 @@
-CREATE TABLE component_meta(
+
+CREATE DATABASE maple
+  DEFAULT CHARACTER SET = 'utf8mb4';
+
+use maple;
+
+CREATE TABLE IF NOT EXISTS component_meta(
   id VARCHAR(36) NOT NULL PRIMARY KEY,
   name VARCHAR(255) NOT NULL,
   icon VARCHAR(255),
@@ -8,23 +14,26 @@ CREATE TABLE component_meta(
   created_user_id VARCHAR(36),
   latest_updated_user_id VARCHAR(36),
   created_time DATETIME,
-  latest_updated_time DATETIME
+  latest_updated_time DATETIME,
+  deleted TINYINT DEFAULT 0
 ) CHARACTER SET utf8mb4;
 
-CREATE TABLE prop_meta(  
-  id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+CREATE TABLE IF NOT EXISTS prop_meta(  
+  id VARCHAR(36) NOT NULL PRIMARY KEY,
+  name VARCHAR(255) NOT NULL,
   type TINYINT NOT NULL,
   required TINYINT NOT NULL DEFAULT 0,
-  default_value VARCHAR(255),
-  parent_id INT,
+  parent_id VARCHAR(36),
   component_meta_id VARCHAR(36),
   created_user_id VARCHAR(36),
   latest_updated_user_id VARCHAR(36),
   created_time DATETIME,
-  latest_updated_time DATETIME
+  latest_updated_time DATETIME,
+  deleted TINYINT DEFAULT 0,
+  INDEX USING BTREE (component_meta_id)
 ) CHARACTER SET utf8mb4;
 
-CREATE Table page(
+CREATE Table IF NOT EXISTS page(
   id VARCHAR(36) NOT NULL PRIMARY KEY,
   name VARCHAR(255) NOT NULL,
   icon VARCHAR(255) NOT NULL,
@@ -37,5 +46,6 @@ CREATE Table page(
   created_user_id VARCHAR(36),
   latest_updated_user_id VARCHAR(36),
   created_time DATETIME,
-  latest_updated_time DATETIME
+  latest_updated_time DATETIME,
+  deleted TINYINT DEFAULT 0
 ) CHARACTER SET utf8mb4;

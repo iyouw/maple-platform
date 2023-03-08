@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.maple.app.dao.ComponentMetaDao">
+    <resultMap type="com.maple.app.entity.ComponentMeta" id="ComponentMetaResult">
+        <result property="createdTime" column="created_time" javaType="java.time.LocalDateTime"/>
+        <result property="latestUpdatedTime" column="latest_updated_time" javaType="java.time.LocalDateTime"/>
+    </resultMap>
+    <select id="getList" resultMap="ComponentMetaResult">
+        SELECT * FROM component_meta
+        WHERE deleted = 0
+        ORDER BY latest_updated_time DESC
+    </select>
+    <select id="getById" resultMap="ComponentMetaResult">
+        SELECT * FROM component_meta WHERE id=#{id} AND deleted=0
+    </select>
+    <insert id="add">
+        INSERT INTO component_meta(id,name,icon,description,tag,slots,created_time,latest_updated_time)
+        VALUES(#{id},#{name},#{icon},#{description},#{tag},#{slots},#{createdTime},#{latestUpdatedTime})
+    </insert>
+    <update id="update">
+        UPDATE component_meta
+        SET
+        name=#{name},icon=#{icon},description=#{description},tag=#{tag},slots=#{slots},latest_updated_time=#{latestUpdatedTime}
+        WHERE id=#{id}
+    </update>
+    <update id="deleteById">
+        UPDATE component_meta
+        SET
+        deleted=1
+        WHERE id=#{id} AND deleted=0
+    </update>
+    <update id="deleteByIds">
+        UPDATE component_meta 
+        WHERE id in (
+        <foreach item="item" collection="list" separator=",">
+            #{item}
+        </foreach> 
+        ) AND deleted=0
+    </update>
+</mapper>

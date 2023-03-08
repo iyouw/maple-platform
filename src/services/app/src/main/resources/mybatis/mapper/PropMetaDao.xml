@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.maple.app.dao.PropMetaDao">
+    <resultMap type="com.maple.app.entity.PropMeta" id="PropMetaResult">
+        <result property="componentMetaId"  column="component_meta_id" javaType="java.util.UUID"/>
+        <result property="createdTime" column="created_time" javaType="java.time.LocalDateTime"/>
+        <result property="latestUpdatedTime" column="latest_updated_time" javaType="java.time.LocalDateTime"/>
+    </resultMap>
+    <select id="getByComponentMetaId" resultMap="PropMetaResult">
+        SELECT * FROM prop_meta
+        WHERE component_meta_id=#{id} AND deleted=0
+    </select>
+    <insert id="addList">
+        INSERT INTO prop_meta(id,name,type,required,parent_id,component_meta_id,created_user_id,latest_updated_user_id,created_time,latest_updated_time) VALUES
+        <foreach item="item" collection="list" separator=",">
+            (#{item.id},#{item.name},#{item.type},#{item.required},#{item.parentId},#{item.componentMetaId},#{item.createdUserId},#{item.latestUpdatedUserId},#{item.createdTime},#{item.latestUpdatedTime})
+        </foreach>
+    </insert>
+    <update id="deleteByComponentMetaId" >
+        UPDATE prop_meta
+        SET
+        deleted=1
+        WHERE component_meta_id=#{id} AND deleted=0
+    </update>
+</mapper>
