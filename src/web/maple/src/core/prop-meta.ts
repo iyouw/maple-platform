@@ -1,23 +1,28 @@
-import type { PropMetaType } from "./prop-meta-type";
+import { PropMetaType } from "./prop-meta-type";
 
 export class PropMeta {
   public name: string;
 
-  public type: PropMetaType;
+  public type: number;
 
   public required: boolean;
 
-  public defaultValue?: unknown;
-
   public readonly children: Array<PropMeta>;
 
-  public constructor(name: string, type: PropMetaType, required: boolean, defaultValue?: unknown) {
+  public readonly parent?: PropMeta;
+
+  public constructor(name: string = '', type: number = PropMetaType.Boolean.value, required: boolean = false, parent?: PropMeta) {
     this.name = name;
     this.type = type;
     this.required = required;
-    this.defaultValue = defaultValue;
 
     this.children = new Array<PropMeta>();
+
+    this.parent = parent;
+  }
+
+  public get isObject(): boolean {
+    return this.type === PropMetaType.Object.value;
   }
 
   public add(meta: PropMeta): void {

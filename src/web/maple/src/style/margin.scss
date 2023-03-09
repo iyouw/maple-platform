@@ -1,0 +1,21 @@
+.h{
+  $stops: 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70, 75, 80, 85, 90, 95, 100;
+
+  @each $stop in $stops {
+    &-m-t-#{$stop} {
+      margin-bottom: #{stop}px;
+    }
+
+    &-m-b-#{$stop}{
+      margin-bottom: #{$stop}px;
+    }
+
+    &-m-l-#{$stop}{
+      margin-left: #{$stop}px;
+    }
+
+    &-m-r-#{$stop}{
+      margin-right: #{$stop}px;
+    }
+  }
+}

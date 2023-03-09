@@ -11,6 +11,7 @@ const router = createRouter({
     {
       path: '/component',
       component: RouterView,
+      redirect: '/component/list',
       children: [
         {
           path: `list`,

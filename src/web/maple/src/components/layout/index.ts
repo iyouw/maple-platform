@@ -1,3 +1,3 @@
 import Layout from './layout';
-import './index.less';
+import './index.scss';
 export default Layout;

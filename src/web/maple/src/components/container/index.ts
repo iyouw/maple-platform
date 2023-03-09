@@ -1,3 +1,3 @@
 import Container from './container';
-import './index.less';
+import './index.scss';
 export default Container;

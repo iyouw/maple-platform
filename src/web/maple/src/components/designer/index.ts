@@ -1,3 +1,3 @@
 import Designer from './designer';
-import './index.less';
+import './index.scss';
 export default Designer;

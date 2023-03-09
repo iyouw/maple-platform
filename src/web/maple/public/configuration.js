@@ -1,3 +1,3 @@
 window.__MAPLE__ = {
-  api: 'http://localhost:4600'
+  api: 'http://localhost:8080'
 }

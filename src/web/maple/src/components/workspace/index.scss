@@ -1,5 +1,5 @@
-@left-width: 300px;
-@right-width: 300px;
+$left-width: 300px;
+$right-width: 300px;
 
 .m{
   &-workspace{
@@ -10,7 +10,7 @@
     flex-shrink: 0;
 
     &__left{
-      width: @left-width;
+      width: $left-width;
       height: 100%;
       overflow: hidden;
       border-right: 1px solid var(--split-color);
@@ -22,7 +22,7 @@
     }
 
     &__right{
-      width: @right-width;
+      width: $right-width;
       height: 100%;
       overflow: hidden;
       border-left: 1px solid var(--split-color);

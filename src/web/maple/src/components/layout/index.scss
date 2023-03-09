@@ -1,4 +1,4 @@
-@header-height: 80px;
+$header-height: 80px;
 
 .m{
   &-layout{
@@ -6,12 +6,12 @@
     height: 100%;
 
     &__header{
-      height: @header-height;
+      height: $header-height;
       border-bottom: 1px solid var(--split-color);
     }
 
     &__body{
-      height: calc(100% - @header-height);
+      height: calc(100% - $header-height);
     }
   }
 }

@@ -1,0 +1,42 @@
+$prop-meta-editor-height: 56px;
+$prop-meta-editor-indent: 36px;
+
+.m{
+  &-prop-meta-editor{
+    $space: &;
+    
+    &__header{
+      height: $prop-meta-editor-height;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+
+      #{$space}__prefix{
+        width: 24px;
+      }
+  
+      #{$space}__name {
+        flex: 1;
+      }
+  
+      #{$space}__required{
+        margin-left: 10px;
+        margin-right: 15px;
+      }
+  
+      #{$space}__type {
+        width: 100px;
+        margin-right: 20px;
+      }
+  
+      #{$space}__action {
+        width: 160px;
+        cursor: pointer;
+      }
+    }
+
+    &__body{
+      padding-left: $prop-meta-editor-indent;
+    }
+  }
+}

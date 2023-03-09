@@ -1,3 +1,3 @@
 import Workspace from './workspace';
-import './index.less';
+import './index.scss';
 export default Workspace;

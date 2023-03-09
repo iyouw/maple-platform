@@ -5,8 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.maple.app.dao.ComponentMetaDao;
@@ -14,12 +13,11 @@ import com.maple.app.dao.PropMetaDao;
 import com.maple.app.entity.ComponentMeta;
 import com.maple.app.entity.PropMeta;
 
-@Component
+@Service
 public class ComponentMetaService {
   private ComponentMetaDao componentMetaDao;
   private PropMetaDao propMetaDao;
 
-  @Autowired
   public ComponentMetaService(ComponentMetaDao componentMetaDao, PropMetaDao propMetaDao) {
     this.componentMetaDao = componentMetaDao;
     this.propMetaDao = propMetaDao;

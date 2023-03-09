@@ -9,12 +9,12 @@ import router from './router'
 import { useComponents } from '@/components'
 import { useDirectives } from '@/directives'
 
-import { config } from '@/utils/configuration';
+import { CONFIG } from '@/utils/configuration';
 
 import '@linker-design/linker/dist/linker.less';
-import './style/index.less';
+import './style/index.scss';
 
-config.loadAsync().then(() => {
+CONFIG.loadAsync().then(() => {
   const app = createApp(App);
 
   app.use(createPinia());

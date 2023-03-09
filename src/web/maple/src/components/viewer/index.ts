@@ -1,3 +1,3 @@
 import Viewer from './viewer'
-import './index.less';
+import './index.scss';
 export default Viewer;
