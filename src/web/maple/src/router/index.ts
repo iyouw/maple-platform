@@ -9,21 +9,21 @@ const router = createRouter({
       component: () => import(`../views/HomeView.vue`)
     },
     {
-      path: '/component',
+      path: '/component-meta',
       component: RouterView,
-      redirect: '/component/list',
+      redirect: '/component-meta/list',
       children: [
         {
           path: `list`,
-          component: () => import(`../views/component/ListView.vue`)
+          component: () => import(`../views/component-meta/ListView.vue`)
         },
         {
           path: `add`,
-          component: () => import(`../views/component/EditView.vue`)
+          component: () => import(`../views/component-meta/EditView.vue`)
         },
         {
           path: `edit/:id`,
-          component: () => import(`../views/component/EditView.vue`)
+          component: () => import(`../views/component-meta/EditView.vue`)
         }
       ]
     }

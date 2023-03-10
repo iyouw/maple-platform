@@ -1,4 +1,4 @@
-import type { ComponentMeta } from "./component-meta";
+import type { ComponentMeta } from "./view/component-meta";
 
 export class Component {
   public meta: ComponentMeta;

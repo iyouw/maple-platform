@@ -1,0 +1,70 @@
+$prop-meta-editor-height: 56px;
+$prop-meta-editor-indent: 36px;
+$prop-meta-editor-placeholder-height:300px;
+
+.m{
+  &-prop-meta-editor{
+    min-height: $prop-meta-editor-placeholder-height;
+    border: 1px dashed var(--border-color);
+
+    &__item{
+      $item: &;
+      
+      #{$item}-header{
+        height: $prop-meta-editor-height;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+  
+        #{$item}-prefix{
+          margin-right: 10px;
+          cursor: pointer;
+
+          &--open{
+            transform-origin: center center;
+            transform: rotateZ(45deg);
+          }
+        }
+    
+        #{$item}-name {
+          flex: 1;
+        }
+    
+        #{$item}-required{
+          margin-left: 10px;
+          margin-right: 15px;
+        }
+    
+        #{$item}-type {
+          width: 100px;
+          margin-right: 20px;
+        }
+    
+        #{$item}-action {
+          width: 160px;
+          cursor: pointer;
+        }
+      }
+  
+      #{$item}-body{
+        padding-left: $prop-meta-editor-indent;
+      }
+    }
+
+    &__placeholder{
+      width: 100%;
+      height: $prop-meta-editor-placeholder-height;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+
+      &-container{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        cursor: pointer;
+      }
+    }
+  }
+}

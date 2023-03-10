@@ -14,18 +14,20 @@ import { CONFIG } from '@/utils/configuration';
 import '@linker-design/linker/dist/linker.less';
 import './style/index.scss';
 
-CONFIG.loadAsync().then(() => {
-  const app = createApp(App);
+await CONFIG.loadAsync();
 
-  app.use(createPinia());
-  app.use(router)
-  app.use(Linker);
-  app.use(LinkerIcon);
-  
-  useComponents(app);
-  useDirectives(app);
 
-  app.mount('#app')
-})
+const app = createApp(App);
+
+app.use(createPinia());
+app.use(router)
+app.use(Linker);
+app.use(LinkerIcon);
+
+useComponents(app);
+useDirectives(app);
+
+app.mount('#app')
+
 
 

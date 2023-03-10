@@ -23,10 +23,10 @@
   </div>
 </template>
 <script setup lang="ts">
-import type { ComponentMeta } from '@/core/component-meta';
+import { ComponentMeta } from '@/core/view/component-meta';
 import { createSpaceP } from '@/utils/space';
 import { onMounted, ref } from 'vue';
-import { ComponentMetaApi } from '@/api/component-meta';
+import { ComponentMetaApi } from '@/api/component-meta-api';
 import { useRouter } from 'vue-router';
 
 const [ bem ] = createSpaceP('component-meta-list'); 
@@ -50,21 +50,21 @@ const columns = [
   }
 ];
 
-const data = ref<Array<ComponentMeta>>();
+const data = ref<Array<ComponentMeta>>([]);
 
 const getComponentList = async () => {
-  const res = await ComponentMetaApi.List();
-  data.value = res;
+  const entities = await ComponentMetaApi.List();
+  data.value = ComponentMeta.FromEntityList(entities);
 }
 
 const router = useRouter();
 
 const onAddComponent = () => {
-  router.push("/component/add");
+  router.push("/component-meta/add");
 }
 
 const onEditComponentMeta = (componentMeta:ComponentMeta) => {
-  router.push(`/component/edit/${componentMeta.id}`)
+  router.push(`/component-meta/edit/${componentMeta.id}`)
 }
 
 onMounted(()=>{
@@ -77,6 +77,7 @@ onMounted(()=>{
   &-component-meta-list{
     width: 1200px;
     margin: 0 auto;
+    padding-top: 30px;
 
     &__search{
       min-height: 200px;

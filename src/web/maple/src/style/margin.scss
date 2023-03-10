@@ -3,7 +3,7 @@
 
   @each $stop in $stops {
     &-m-t-#{$stop} {
-      margin-bottom: #{stop}px;
+      margin-top: #{$stop}px;
     }
 
     &-m-b-#{$stop}{

@@ -1,27 +1,32 @@
-import type { ResponseBase } from '@/model/response-base';
-import axios, { type AxiosResponse } from 'axios';
+import type { ResponseBase } from '@/core/model/response-base';
+import axios, { type AxiosInstance, type AxiosResponse } from 'axios';
 
 import { CONFIG } from './configuration';
 
-const baseURL = CONFIG.get<string>('api');
-const timeout = 5 * 60 * 1000;
+let transport: AxiosInstance;
 
-const transport  = axios.create({
-  baseURL,
-  timeout
-});
+export const getTransport = () => {
+  if (!transport) {
+    const baseURL = CONFIG.get<string>('api');
+    const timeout = 5 * 60 * 1000;
 
-transport.interceptors.request.use();
+    transport  = axios.create({
+      baseURL,
+      timeout
+    });
 
-transport.interceptors.response.use(
-  (res: AxiosResponse<ResponseBase>) =>{
-    if (res.status !== 200) throw new Error(res.statusText);
-    const { code, msg } = res.data;
-    if (code !== 0) throw new Error(msg);
-    return res;
-  }, 
-  err=>{
-    throw err;
-  });
+    transport.interceptors.request.use();
 
-export { transport };
+    transport.interceptors.response.use(
+      (res: AxiosResponse<ResponseBase>) =>{
+        if (res.status !== 200) throw new Error(res.statusText);
+        const { code, msg } = res.data;
+        if (code !== 0) throw new Error(msg);
+        return res;
+      }, 
+      err=>{
+        throw err;
+    });
+  }
+  return transport;
+}

@@ -6,14 +6,16 @@
 <script setup lang="ts">
 
 import { Page } from '@/core/page';
-import { ComponentMeta } from '@/core/component-meta';
+import { ComponentMeta } from '@/core/view/component-meta';
 import { Component } from '@/core/component';
 import { ref } from 'vue';
 
 const p = ref<Page>();
 
 const page = new Page(`TestPage`, `IconUrl`, 800, 600)
-let meta = new ComponentMeta(`card`, `h-card`);
+let meta = new ComponentMeta();
+meta.name = 'card';
+meta.tag = 'h-card';
 let component = new Component(meta, { title: `Hello Maple` });
 page.add(component);
 

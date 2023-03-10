@@ -1,4 +1,5 @@
 #{$theme-tag}{
-  --split-color: $split;
-  --highlight-color: $highlight;
+  --split-color: #{$split};
+  --border-color: #{$border};
+  --highlight-color: #{$highlight};
 }

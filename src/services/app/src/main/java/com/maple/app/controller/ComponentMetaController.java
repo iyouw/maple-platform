@@ -42,6 +42,12 @@ public class ComponentMetaController {
     return res ? ResponseBase.success(res) : ResponseBase.fail(res);
   }
 
+  @PostMapping("/update")
+  public ResponseBase<Boolean> update(@RequestBody ComponentMeta componentMeta) {
+    var res = service.update(componentMeta);
+    return res ? ResponseBase.success(res) : ResponseBase.fail(res);
+  }
+
   @PostMapping("/delete/{id}")
   public ResponseBase<Boolean> deleteById(@PathVariable UUID id) {
     var res = service.deleteById(id);
