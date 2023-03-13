@@ -4,7 +4,7 @@
     </div>
     <div :class="bem('list')">
       <div class="h-m-b-15">
-        <h-button type="primary" size="medium" @click="onAddComponent">
+        <h-button type="primary" size="medium" @click="onAddComponentMeta">
           <template #icon>
             <icon-plus />
           </template>
@@ -15,7 +15,7 @@
         <template #action="{ record }">
           <h-space>
             <h-button type="text" size="small" @click="()=>onEditComponentMeta(record)">modify</h-button>
-            <h-button type="text" size="small">delete</h-button>
+            <h-button type="text" size="small" @click="()=>onDeleteComponentMeta(record)">delete</h-button>
           </h-space>
         </template>
       </h-table>
@@ -29,7 +29,7 @@ import { onMounted, ref } from 'vue';
 import { ComponentMetaApi } from '@/api/component-meta-api';
 import { useRouter } from 'vue-router';
 
-const [ bem ] = createSpaceP('component-meta-list'); 
+const [ bem ] = createSpaceP('component-meta-list');
 
 const columns = [
   {
@@ -52,14 +52,14 @@ const columns = [
 
 const data = ref<Array<ComponentMeta>>([]);
 
-const getComponentList = async () => {
+const getComponentMetaList = async () => {
   const entities = await ComponentMetaApi.List();
   data.value = ComponentMeta.FromEntityList(entities);
 }
 
 const router = useRouter();
 
-const onAddComponent = () => {
+const onAddComponentMeta = () => {
   router.push("/component-meta/add");
 }
 
@@ -67,12 +67,17 @@ const onEditComponentMeta = (componentMeta:ComponentMeta) => {
   router.push(`/component-meta/edit/${componentMeta.id}`)
 }
 
+const onDeleteComponentMeta = async (componentMeta: ComponentMeta) => {
+  await ComponentMetaApi.Delete(componentMeta.id);
+  await getComponentMetaList();
+}
+
 onMounted(()=>{
-  getComponentList();
+  getComponentMetaList();
 })
 
 </script>
-<style lang="less" scoped>
+<style lang="scss" scoped>
 .p{
   &-component-meta-list{
     width: 1200px;

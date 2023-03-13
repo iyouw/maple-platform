@@ -18,14 +18,14 @@ export class ComponentMetaApi {
     return res.data.data;
   }
 
-  public static async Add(componentMeta: ComponentMeta): Promise<boolean> {
-    const url = `componentMetas`;
-    const res = await getTransport().post<ResponseBase<boolean>>(url, componentMeta);
+  public static async Delete(id: string): Promise<boolean> {
+    const url = `componentMetas/delete/${id}`;
+    const res = await getTransport().post<ResponseBase<boolean>>(url);
     return res.data.data;
   }
 
-  public static async Update(componentMeta: ComponentMeta): Promise<boolean> {
-    const url = `componentMetas/update`;
+  public static async CreateOrUpdate(componentMeta: ComponentMeta): Promise<boolean> {
+    const url = `componentMetas`;
     const res = await getTransport().post<ResponseBase<boolean>>(url, componentMeta);
     return res.data.data;
   }

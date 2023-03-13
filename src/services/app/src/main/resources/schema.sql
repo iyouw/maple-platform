@@ -15,7 +15,7 @@ CREATE TABLE IF NOT EXISTS component_meta(
   latest_updated_user_id VARCHAR(36),
   created_time DATETIME,
   latest_updated_time DATETIME,
-  deleted TINYINT DEFAULT 0
+  deleted TINYINT(1) DEFAULT 0
 ) CHARACTER SET utf8mb4;
 
 CREATE TABLE IF NOT EXISTS prop_meta(  
@@ -29,11 +29,11 @@ CREATE TABLE IF NOT EXISTS prop_meta(
   latest_updated_user_id VARCHAR(36),
   created_time DATETIME,
   latest_updated_time DATETIME,
-  deleted TINYINT DEFAULT 0,
-  INDEX USING BTREE (component_meta_id)
+  deleted TINYINT(1) DEFAULT 0,
+  INDEX USING BTREE (deleted, component_meta_id)
 ) CHARACTER SET utf8mb4;
 
-CREATE Table IF NOT EXISTS page(
+CREATE TABLE IF NOT EXISTS page(
   id VARCHAR(36) NOT NULL PRIMARY KEY,
   name VARCHAR(255) NOT NULL,
   icon VARCHAR(255) NOT NULL,
@@ -47,5 +47,19 @@ CREATE Table IF NOT EXISTS page(
   latest_updated_user_id VARCHAR(36),
   created_time DATETIME,
   latest_updated_time DATETIME,
-  deleted TINYINT DEFAULT 0
+  deleted TINYINT(1) DEFAULT 0,
+  INDEX USING BTREE (deleted, app_id, latest_updated_time)
+) CHARACTER SET utf8mb4;
+
+CREATE TABLE IF NOT EXISTS app(
+  id VARCHAR(36) NOT NULL PRIMARY KEY,
+  name VARCHAR(255) NOT NULL,
+  icon VARCHAR(255) NOT NULL,
+  description TEXT,
+  create_user_id VARCHAR(36),
+  latest_updated_user_id VARCHAR(36),
+  created_time DATETIME,
+  latest_updated_time DATETIME,
+  deleted TINYINT(1) DEFAULT 0,
+  INDEX USING BTREE (deleted, latest_updated_time)
 ) CHARACTER SET utf8mb4;

@@ -6,7 +6,8 @@ import java.util.UUID;
 import com.maple.app.entity.PropMeta;
 
 public interface PropMetaDao {
-  Integer addList(List<PropMeta> propMetas);
   List<PropMeta> getByComponentMetaId(UUID componentMetaId);
+  List<PropMeta> getByComponentMetaIds(List<UUID> ids);
+  Integer addList(List<PropMeta> propMetas);
   Integer deleteByComponentMetaId(UUID componentMetaId);
 }

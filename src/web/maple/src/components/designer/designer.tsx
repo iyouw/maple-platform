@@ -1,6 +1,6 @@
-import type { Component } from "@/core/component";
-import { Page } from "@/core/page";
-import { defineComponent, resolveComponent } from "vue";
+import type { Component } from "@/core/view/component";
+import { Page } from "@/core/view/page";
+import { defineComponent, resolveComponent, toRefs } from "vue";
 
 import { createSpaceM } from "@/utils/space";
 
@@ -9,18 +9,23 @@ const [bem, name] = createSpaceM(`designer`);
 export default defineComponent({
   name,
   props: {
-    page: Page
+    page: {
+      required: true,
+      type: Page
+    }
   },
   setup(props) {
+    const { page } = toRefs(props);
+
     const renderComponents = (components: Array<Component>) => components.map(component => renderComponent(component));
 
     const renderComponent = (component: Component) => {
       const { tag } = component.meta;
       const comp = resolveComponent(tag);
-      const { props = {}, style = {} } = component;
+      const { propData = {}, styleData = {} } = component;
       return (
         <m-container>
-          <comp {...props } style={ style }>
+          <comp {...propData } style={ styleData }>
             { renderComponents(component.children) }
           </comp> 
         </m-container>
@@ -29,7 +34,7 @@ export default defineComponent({
 
     return () => (
       <div class={ bem() }>
-        {renderComponents(props.page?.components ?? [])}
+        {renderComponents(page.value.components)}
       </div>
     );
   }

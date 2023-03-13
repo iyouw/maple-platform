@@ -24,14 +24,22 @@ export class ComponentMeta {
   public propMetas: Array<PropMeta>;
   public slots: string;
 
-  public constructor() {
-    this.id = '';
-    this.name = '';
-    this.icon = '';
-    this.description = '';
-    this.tag = '';
-    this.propMetas = new Array<PropMeta>();
-    this.slots = '';
+  public constructor(
+    id: string = '',
+    name: string = '',
+    icon: string = '',
+    description: string = '',
+    tag: string = '',
+    slots: string = '',
+    propMetas: Array<PropMeta> = new Array<PropMeta>()
+  ) {
+    this.id = id;
+    this.name = name;
+    this.icon = icon;
+    this.description = description;
+    this.tag = tag;
+    this.slots = slots;
+    this.propMetas = propMetas;
   }
 
   public get hasPropMetas(): boolean {
@@ -54,34 +62,5 @@ export class ComponentMeta {
     this.tag = entity.tag;
     this.propMetas = PropMeta.FromEntityList(entity.propMetas);
     this.slots = entity.slots ?? '';
-  }
-
-  public addPropMeta(sibling?: PropMeta): void {
-    const cur = PropMeta.Create();
-    if (!sibling) {
-      this.propMetas.push(cur);
-    } else {
-      let arr = this.propMetas;
-      if (sibling.parent) arr = sibling.parent.children;
-      const index = arr.findIndex(x => x === sibling);
-      if( index === -1) return;
-      cur.parent = sibling.parent;
-      arr.splice(index + 1, 0, cur);
-    }
-  }
-
-  public deletePropMeta(propMeta: PropMeta): void {
-    let arr = this.propMetas;
-    if (propMeta.parent) {
-      arr = propMeta.parent.children;
-    }
-    const index = arr.findIndex(x => x === propMeta);
-    if (index === -1) return;
-    propMeta.parent = undefined;
-    arr.splice(index, 1);
-  }
-
-  public addChildPropMeta(parent: PropMeta) {
-    parent.add(PropMeta.Create());
   }
 }

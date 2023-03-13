@@ -1,34 +1,35 @@
 
-import type { PropMeta } from "@/core/view/prop-meta";
-import { useComponentMetaStore } from "@/stores/component-meta";
+import { PropMeta } from "@/core/view/prop-meta";
 import { createSpaceM } from "@/utils/space";
-import { defineComponent } from "vue";
+import { defineComponent, toRefs } from "vue";
 import { PropMetaType } from "@/core/prop-meta-type";
-import { storeToRefs } from "pinia";
-
-
 
 const [ bem, name ] = createSpaceM('prop-meta-editor');
 
 export default defineComponent({
   name,
-  setup(){
+  props:{
+    propMetas:{
+      type: Array<PropMeta>,
+      default: () => []
+    }
+  },
+  setup(props){
     const options = PropMetaType.ToOptions();
+    const { propMetas } = toRefs(props);
 
-    const { componentMeta } = storeToRefs(useComponentMetaStore());
+    const onAdd = () => propMetas.value.push(PropMeta.Create());
 
-    const onAdd = () => componentMeta.value.addPropMeta();
+    const onAddSibling = (item: PropMeta) => item.addSibling(undefined, propMetas.value);
 
-    const onAddSibling = (item: PropMeta) => componentMeta.value.addPropMeta(item);
+    const onDelete = (item: PropMeta) => item.delete(propMetas.value);
 
-    const onDelete = (item: PropMeta) => componentMeta.value.deletePropMeta(item);
+    const onAddChild = (parent: PropMeta) => parent.addChild();
 
-    const onAddChild = (item: PropMeta) => componentMeta.value.addChildPropMeta(item);
-
-    const onToggleOpen = (item: PropMeta) => item.isOpen = !item.isOpen;
+    const onToggleOpen = (item: PropMeta) => item.toggleOpen();
 
     const renderPlaceholder = () => {
-      if (componentMeta.value.hasPropMetas) return;
+      if (propMetas.value.length) return;
       return (
         <div class={bem('placeholder')} >
           <div class={bem('placeholder-container')} onClick={ onAdd }>
@@ -40,8 +41,8 @@ export default defineComponent({
     };
 
     const renderPropMetas = () => {
-      if (!componentMeta.value.hasPropMetas) return;
-      return componentMeta.value.propMetas.map((propMeta) => renderItem(propMeta));
+      if (!propMetas.value) return;
+      return propMetas.value.map((propMeta) => renderItem(propMeta));
     };
 
     const renderPrefix = (item: PropMeta) => (

@@ -8,9 +8,9 @@ import com.maple.app.entity.ComponentMeta;
 
 public interface ComponentMetaDao {
   ArrayList<ComponentMeta> getList();
-  ComponentMeta getById(UUID id);
+  ComponentMeta get(UUID id);
   Integer add(ComponentMeta meta);
   Integer update(ComponentMeta meta);
-  Integer deleteById(UUID id);
+  Integer delete(UUID id);
   Integer deleteByIds(List<UUID> ids);
 }

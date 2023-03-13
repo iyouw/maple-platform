@@ -6,7 +6,26 @@ const router = createRouter({
     {
       path: '/',
       name: 'home',
-      component: () => import(`../views/HomeView.vue`)
+      redirect: "/app"
+    },
+    {
+      path: "/app",
+      component: RouterView,
+      redirect: "/app/list",
+      children:[
+        {
+          path:"list",
+          component: () => import(`../views/app/ListView.vue`)
+        },
+        {
+          path:"detail",
+          component: () => import(`../views/app/DetailView.vue`)
+        }
+      ]
+    },
+    {
+      path: "/page/:id",
+      component: () => import(`../views/page/EditView.vue`)
     },
     {
       path: '/component-meta',

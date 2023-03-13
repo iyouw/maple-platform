@@ -16,7 +16,7 @@
       <h-form-item field="description" label="description">
         <h-input v-model="componentMeta.description" placeholder="please enter component description" />
       </h-form-item>
-      <m-prop-meta-editor class="h-m-t-30 h-m-b-35"/>
+      <m-prop-meta-editor :propMetas="componentMeta.propMetas" class="h-m-t-30 h-m-b-35"/>
       <div class="h-f-c-c">
         <h-button html-type="submit" type="primary" size="large" class="h-w-250">保存</h-button>
       </div>
@@ -25,38 +25,40 @@
 </template>
 
 <script setup lang="ts">
-import { useRoute, useRouter } from 'vue-router';
+import { useRoute } from 'vue-router';
 import { createSpaceP } from '@/utils/space'; 
-import { onMounted } from 'vue';
-import { useComponentMetaStore } from '@/stores/component-meta';
-import { storeToRefs } from 'pinia';
+import { onMounted, ref } from 'vue';
 import { Message } from '@linker-design/linker';
+import { ComponentMeta } from '@/core/view/component-meta';
+import { ComponentMetaApi } from '@/api/component-meta-api';
 
 const [ bem ] = createSpaceP('component-meta') 
 
 const route = useRoute();
-const componentId = route.params.id as string;
+const componentMetaId = route.params.id as string;
 
-const componentMetaStore = useComponentMetaStore();
-const { componentMeta } = storeToRefs(componentMetaStore);
-const { initAsync, saveAsync } = componentMetaStore;
+const componentMeta  = ref<ComponentMeta>(ComponentMeta.Create());
 
-const router = useRouter();
+const initAsync = async () => {
+  if (!componentMetaId) return;
+  const resp = await ComponentMetaApi.Detail(componentMetaId);
+  componentMeta.value.fromEntity(resp);
+}
 
 const onSave = async (res: any)=> {
-  if(res.errors || componentMeta.value.hasError) return;
-  await saveAsync();
+  if (res.errors || componentMeta.value.hasError) return;
+  await ComponentMetaApi.CreateOrUpdate(componentMeta.value);
   Message.success('保存成功');
-  router.push('/component-meta');
+  await initAsync();
 }
 
 onMounted(() => {
-  initAsync(componentId);
+  initAsync();
 })
 
 </script>
 
-<style lang="less" scoped>
+<style lang="scss" scoped>
 .p{
   &-component-meta{
     width: 1200px;

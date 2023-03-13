@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.maple.app.dao.AppDao">
+    <resultMap type="com.maple.app.entity.App" id="AppResult">
+        <result property="createdTime" column="created_time" javaType="java.time.LocalDateTime"/>
+        <result property="latestUpdatedTime" column="latest_updated_time" javaType="java.time.LocalDateTime"/>
+    </resultMap>
+    <select id="getList" resultMap="AppResult">
+        SELECT * FROM app
+        WHERE id=#{id} AND deleted=0
+        ORDER BY latest_updated_time DESC
+    </select>
+    <select id="get" resultMap="AppResult">
+        SELECT * FROM app
+        WHERE id=#{id} AND deleted=0
+    </select>
+    <insert id="add">
+        INSERT INTO app(id,name,icon,description,created_user_id,latest_updated_user_id,created_time,latest_updated_time) 
+        VALUES(#{id},#{name},#{icon},#{description},#{createdUserId},#{latestUpdatedUserId},#{createdTime},#{latestUpdatedTime})
+    </insert>
+    <update id="update" >
+        UPDATE app
+        SET
+        name=#{name},icon=#{icon},description=#{description},latest_updated_user_id=#{latestUpdatedUserId},latest_updated_time=#{latestUpdatedTime}
+        WHERE id=#{id} AND deleted=0
+    </update>
+    <update id="delete" >
+        UPDATE app
+        SET
+        deleted=1
+        WHERE id=#{id} AND deleted=0
+    </update>
+</mapper>

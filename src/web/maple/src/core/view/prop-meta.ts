@@ -38,14 +38,21 @@ export class PropMeta {
   // view 
   public isOpen: boolean;
 
-  public constructor() {
-    this.id = '';
-    this.name = '';
-    this.type = PropMetaType.String.value;
-    this.required = false;
-    this.children = new Array<PropMeta>();
+  public constructor(
+    id: string = '',
+    name: string = '',
+    type: number = PropMetaType.String.value,
+    required: boolean = false,
+    children: Array<PropMeta> = new Array<PropMeta>(),
+    isOpen: boolean = false
+  ) {
+    this.id = id;
+    this.name = name;
+    this.type = type;
+    this.required = required;
+    this.children = children;
 
-    this.isOpen = true;
+    this.isOpen = isOpen;
   }
 
   public get isComplex(): boolean {
@@ -71,6 +78,39 @@ export class PropMeta {
     const index = this.children.findIndex(x => x.name === name);
     if (index === -1) return;
     this.children.splice(index, 1);
+  }
+
+  public addSibling(sibling?: PropMeta, root?: Array<PropMeta>) {
+    const arr = this.parent?.children ?? root;
+    if (!arr) return;
+    const index = arr.findIndex((x) => x === this);
+    if (index === -1) return;
+    sibling ??= PropMeta.Create();
+    sibling.parent = this.parent;
+    sibling.parentId = this.parentId;
+    arr.splice(index + 1, 0, sibling);
+  }
+
+  public addChild(child?: PropMeta) {
+    child ??= PropMeta.Create();
+    child.parent = this;
+    child.parentId = this.id;
+    this.children.push(child);
+    this.isOpen = true;
+  }
+
+  public delete(root?: Array<PropMeta>) {
+    const arr = this.parent?.children ?? root;
+    if (!arr) return;
+    const index = arr.findIndex((x) => x === this);
+    if (index === -1) return;
+    this.parent = undefined;
+    this.parentId = undefined;
+    arr.splice(index, 1);
+  }
+
+  public toggleOpen() {
+    this.isOpen = !this.isOpen;
   }
 
   public fromEntity(entity: IPropMetaEntity): void {
