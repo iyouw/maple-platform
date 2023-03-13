@@ -18,7 +18,7 @@
     &-circle-#{$sz}{
       width: #{$sz}px;
       height: #{$sz}px;
-      border-radius: #{$sz / 2}px;
+      border-radius: calc($sz / 2);
     }
   }
 }
