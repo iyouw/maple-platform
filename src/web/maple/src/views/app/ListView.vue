@@ -13,8 +13,9 @@
 
 <script setup lang="ts">
 import { createSpaceP } from '@/utils/space';
-import { ref } from 'vue';
+import { onMounted, ref } from 'vue';
 import type { App } from '@/core/view/app';
+import { AppApi } from '@/api/app-api';
 
 const [bem] = createSpaceP(`app-list`);
 
@@ -22,11 +23,11 @@ const apps = ref<Array<App>>([]);
 
 const columns = [
   {
-    name: 'name',
+    title: 'name',
     dataIndex: 'name'
   },
   {
-    name:'action',
+    title:'action',
     slotName:'action'
   }
 ]
@@ -38,6 +39,15 @@ const onModify = (app: App) => {
 const onDelete = (app: App) => {
   
 }
+
+const initAsync = async () => {
+  const res = await AppApi.List();
+  apps.value = res;
+}
+
+onMounted(() => {
+  initAsync();
+})
 
 </script>
 
