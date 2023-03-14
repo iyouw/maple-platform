@@ -24,9 +24,9 @@ export class ComponentMetaApi {
     return res.data.data;
   }
 
-  public static async CreateOrUpdate(componentMeta: ComponentMeta): Promise<boolean> {
+  public static async CreateOrUpdate(componentMeta: ComponentMeta): Promise<string> {
     const url = `componentMetas`;
-    const res = await getTransport().post<ResponseBase<boolean>>(url, componentMeta);
+    const res = await getTransport().post<ResponseBase<string>>(url, componentMeta);
     return res.data.data;
   }
 }
